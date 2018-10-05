@@ -10,6 +10,10 @@ export class AppComponent {
 
   post = {
     title: "Title",
-    isFavorite: true
+    isSelected: true
+  }
+
+  onFavoriteChanged(eventArgs: { newValue: boolean }){
+    console.log("changed", eventArgs);
   }
 }
