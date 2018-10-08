@@ -1,1 +1,79 @@
-<favorite [is-favorite]="post.isSelected" (change)="onFavoriteChanged($event)"></favorite>
+<!--<favorite [is-favorite]="post.isSelected" (change)="onFavoriteChanged($event)"></favorite>-->
+<bootstrap-panel>
+    <ng-container class="heading">Heading</ng-container> <!-- Takes only the content of the html element. -->
+    <div class="body">
+        <h2>Body</h2>
+        <p>Some content here....</p>
+    </div>
+</bootstrap-panel>
+
+
+<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+
+<ng-template #coursesList>
+    <ul>
+        <li *ngFor="let course of courses">
+            {{course}}
+        </li>
+    </ul>
+</ng-template>
+
+<ng-template #noCourses>
+    No courses yet
+</ng-template>
+
+<div [hidden]="coursesStr.length == 0"> <!-- The difference between this and the ngIf is that the hidden leaves
+the 2 divs, only adds the hidden attribute, and the ngIf not. -->
+    <ul>
+        <li *ngFor="let courseStr of coursesStr">
+            {{courseStr}}
+        </li>
+    </ul>
+</div>
+
+<div [hidden]="coursesStr.length > 0">
+    No coursesStr yet
+</div>
+
+<ul class="nav">
+    <li class="nav-item"><a (click)="viewMode = 'map'" class="nav-link">Map View</a></li>
+    <li class="nav-item"><a (click)="viewMode = 'list'" class="nav-link">List View</a></li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map view content</div>
+    <div *ngSwitchCase="'list'">List view content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<br>
+
+<button (click)="onAdd()">Add</button>
+<button (click)="loadApps()">Load Apps</button>
+<ul>
+    <li *ngFor="let app of apps; index as i; even as isEven; trackBy: trackApp">
+        {{i}} - {{app.name}} <span *ngIf="isEven">(EVEN)</span>
+        <button (click)="onRemove(app)">Remove</button>
+    </li>
+</ul>
+
+<br>
+
+<button
+    [ngStyle]="
+    {
+        'backgroundColor': canSave ? 'blue' : 'gray',
+        'color': canSave ? 'white' : 'black',
+        'fontWeight': canSave ? 'bold' : 'normal'
+    }"
+>
+Save
+</button>
+
+<br>
+
+<span>{{task.assignee?.name}}</span> <!-- assignee? : Safe traversal operator, is for the case of assignee == null -->
+
+<br>
+
+<input type="text" [appInputFormat]="'uppercase'"> <!-- appInputFormat: with this attribute angular puts the custom directive -->

@@ -1,6 +1,12 @@
 <span
   class="fas"
-  [class.fa-star]="isSelected"
-  [class.fa-star-of-life]="!isSelected"
+  [ngClass]="
+  {
+    'fa-star': isSelected,
+    'fa-star-of-life': !isSelected
+  }"
   (click)="onClick()"
 ></span>
+
+<!--[class.fa-star]="isSelected"
+  [class.fa-star-of-life]="!isSelected" ANOTHER APPROACH OF CHANGE CLASSES THROUGH A CONDITION-->
